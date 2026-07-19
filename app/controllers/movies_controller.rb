@@ -9,7 +9,7 @@ class MoviesController < ApplicationController
     else
       @ratings_to_show = @all_ratings
     end
-    @movies = Movie.with_ratings(@ratings_to_show)
+    @movies = Movie.with_ratings(@ratings_to_show).order(:release_date)
   end
 
   # GET /movies/1 or /movies/1.json
