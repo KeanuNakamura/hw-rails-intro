@@ -14,8 +14,6 @@ class MoviesController < ApplicationController
     end
 
     @movies = Movie.with_ratings(@ratings_to_show)
-    @sort_by = params[:sort_by]
-    session[:sort_by] = @sort_by
    
     if params[:sort_by]
       @sort_by = params[:sort_by] 
@@ -24,8 +22,8 @@ class MoviesController < ApplicationController
       @sort_by = session[:sort_by]
     else
       @sort_by = :title
-    @movies = @movies.order(@sort_by)
     end
+    @movies = @movies.order(@sort_by)
   end
 
   # GET /movies/1 or /movies/1.json
