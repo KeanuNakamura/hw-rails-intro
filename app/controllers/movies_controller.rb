@@ -6,15 +6,24 @@ class MoviesController < ApplicationController
     @all_ratings = Movie.all_ratings
     if params[:ratings]
       @ratings_to_show = params[:ratings].keys
+      session[:ratings] = @ratings_to_show
+    elsif session[:ratings]
+      @ratings_to_show = session[:ratings]
     else
       @ratings_to_show = @all_ratings
     end
+
     @movies = Movie.with_ratings(@ratings_to_show)
     @sort_by = params[:sort_by]
-    if @sort_by == "title"
-      @movies = @movies.order(:title)
+    session[:sort_by] = @sort_by
+   
+    if params[:sort_by]
+      @sort_by = params[:sort_by] 
+      session[:sort_by] = @sort_by 
+    elsif session[:sort_by]
+      @sort_by = session[:sort_by]
     else
-      @movies = @movies.order(:release_date)
+      @movies = @movies.order(:title)
     end
   end
 
