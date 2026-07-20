@@ -23,7 +23,8 @@ class MoviesController < ApplicationController
     elsif session[:sort_by]
       @sort_by = session[:sort_by]
     else
-      @movies = @movies.order(:title)
+      @sort_by = :title
+    @movies = @movies.order(@sort_by)
     end
   end
 
